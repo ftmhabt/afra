@@ -17,7 +17,7 @@ export default function Card({
         />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 grow">
         <div className="h-full flex flex-col justify-between">
           <h1 className="font-bold">بشقاب میناکاری شده</h1>
           <div className="text-sm">16 روز تا آماده شدن</div>
