@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "./_components/navbar";
+import NavbarLink from "./_components/navbarLink";
+import { FiHome, FiShoppingCart, FiStar, FiUser } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +16,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="font-zain bg-secondary">{children}</body>
+      <body className="font-zain bg-secondary">
+        {children}
+        <Navbar>
+          <NavbarLink url="/">
+            <FiHome size={30} />
+          </NavbarLink>
+          <NavbarLink url="/cart">
+            <FiShoppingCart size={30} />
+          </NavbarLink>
+          <NavbarLink url="/favorites">
+            <FiStar size={30} />
+          </NavbarLink>
+          <NavbarLink url="/dashboard">
+            <FiUser size={30} />
+          </NavbarLink>
+        </Navbar>
+      </body>
     </html>
   );
 }
