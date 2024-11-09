@@ -36,7 +36,7 @@ export default function Home() {
         <Search />
         <Filter category={category} handleCategory={handleCategory} />
       </header>
-      <div className="flex flex-col gap-4 p-6 pt-0">
+      <div className="flex flex-col gap-4 p-6 pt-0 md:flex-row md:grid md:grid-cols-4 md:justify-between">
         {new Array(12)
           .fill("all")
           .map(

@@ -6,14 +6,17 @@ export default function Card({
   imageSource: StaticImageData;
 }) {
   return (
-    <div className="rounded-xl bg-white flex gap-4 p-4 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
-      <Image
-        src={imageSource}
-        alt="pot"
-        width={150}
-        height={150}
-        className="rounded-xl grow"
-      />
+    <div className="rounded-xl bg-white flex gap-4 p-4 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] md:flex-col">
+      <div className="relative w-[250px] h-[250px]">
+        <Image
+          src={imageSource}
+          alt="pot"
+          layout="fill"
+          objectFit="contain"
+          className="rounded-xl"
+        />
+      </div>
+
       <div className="flex flex-col gap-4">
         <div className="h-full flex flex-col justify-between">
           <h1 className="font-bold">بشقاب میناکاری شده</h1>
