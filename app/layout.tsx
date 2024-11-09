@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`font-zain antialiased`}>{children}</body>
+      <body className="font-zain bg-secondary">{children}</body>
     </html>
   );
 }
