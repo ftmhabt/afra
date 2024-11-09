@@ -6,10 +6,7 @@ import { getCookie } from "cookies-next";
 
 interface User {
   id: number;
-  name: string;
   email: string;
-  city: string;
-  phone: string;
 }
 interface State {
   loading: boolean;
