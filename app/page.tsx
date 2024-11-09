@@ -31,7 +31,7 @@ export default function Home() {
   };
   return (
     <div>
-      <header className="flex flex-col gap-4 p-6">
+      <header className="flex flex-col gap-4 *:m-6 *:mb-0 last:*:mb-6">
         <BrandCard />
         <Search />
         <Filter category={category} handleCategory={handleCategory} />
