@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import * as jose from "jose";
-import { setCookie } from "cookies-next";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -36,7 +35,17 @@ export async function POST(req: Request) {
     .setExpirationTime("24h")
     .sign(secret);
 
-  setCookie("jwt", token, { maxAge: 60 * 6 * 24 });
+  const response = NextResponse.json(
+    { message: "Welcome", user },
+    { status: 200 }
+  );
 
-  return NextResponse.json({ message: "welcome", user }, { status: 200 });
+  response.cookies.set("jwt", token, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 24,
+    path: "/",
+  });
+
+  return response;
 }

@@ -39,13 +39,14 @@ export default function AuthContext({
   const fetchUser = async () => {
     try {
       const jwt = getCookie("jwt");
-
+      console.log("jwt", jwt);
       if (!jwt) {
         setAuthState({
           data: null,
           error: null,
           loading: false,
         });
+        return;
       }
 
       const response = await axios.get(`/api/auth/me`, {
@@ -55,12 +56,14 @@ export default function AuthContext({
       });
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
-
+      console.log("r", response);
       setAuthState({
-        data: response.data,
+        data: response.data.user,
         error: null,
         loading: false,
       });
+
+      console.log("authState", authState);
     } catch (error: unknown) {
       const errorMessage = axios.isAxiosError(error)
         ? error.message
@@ -77,7 +80,6 @@ export default function AuthContext({
   useEffect(() => {
     fetchUser();
   }, []);
-
   return (
     <AuthorizationContext.Provider
       value={{

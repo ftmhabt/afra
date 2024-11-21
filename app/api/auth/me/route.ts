@@ -25,10 +25,11 @@ export async function GET(req: Request) {
       email: payload.email,
     },
   });
+  console.log("user:", user);
 
   if (!user) {
     return NextResponse.json({ message: "user not found" }, { status: 401 });
   }
 
-  return NextResponse.json({ message: "welcome", user }, { status: 200 });
+  return NextResponse.json({ user }, { status: 200 });
 }
