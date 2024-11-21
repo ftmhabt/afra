@@ -31,7 +31,7 @@ const useAuth = () => {
       });
 
       setAuthState({
-        data: response.data,
+        data: response.data.user,
         error: null,
         loading: false,
       });
@@ -68,7 +68,7 @@ const useAuth = () => {
       if (response) {
         console.log("response is: ", response);
         setAuthState({
-          data: response.data,
+          data: response.data.user,
           error: null,
           loading: false,
         });

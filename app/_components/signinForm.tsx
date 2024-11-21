@@ -3,6 +3,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import useAuth from "../_hooks/use-auth";
 import { AuthorizationContext } from "../_context/auth-context";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function SigninForm() {
   const [inputs, setInputs] = useState({
@@ -18,8 +19,9 @@ export default function SigninForm() {
   };
   const [disabled, setDisabled] = useState(true);
   const { signin } = useAuth();
-  const { error, loading } = useContext(AuthorizationContext);
+  const { data, error, loading } = useContext(AuthorizationContext);
 
+  if (data) redirect("/dashboard");
   useEffect(() => {
     if (inputs.email && inputs.password) {
       setDisabled(false);

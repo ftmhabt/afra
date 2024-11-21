@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import * as jose from "jose";
-import { setCookie } from "cookies-next";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -15,9 +15,10 @@ export async function POST(req: Request) {
   });
 
   if (userWithEmail) {
-    return Response.json({
-      errorMessage: "User with this email already exists",
-    });
+    return NextResponse.json(
+      { message: "User with this email already exists" },
+      { status: 400 }
+    );
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -38,9 +39,16 @@ export async function POST(req: Request) {
     .setExpirationTime("24h")
     .sign(secret);
 
-  setCookie("jwt", token, { maxAge: 60 * 6 * 24 });
-
-  return Response.json({
-    email: user.email,
+  const response = NextResponse.json(
+    { message: "Welcome", user },
+    { status: 200 }
+  );
+  response.cookies.set("jwt", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 24,
+    path: "/",
   });
+
+  return response;
 }

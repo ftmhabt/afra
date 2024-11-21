@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import * as jose from "jose";
 import { setCookie } from "cookies-next";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -14,13 +15,16 @@ export async function POST(req: Request) {
     },
   });
   if (!user) {
-    return Response.json({ errorMessage: "Email or password is invalid" });
+    return NextResponse.json({ message: "User not found" }, { status: 400 });
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    return Response.json({ errorMessage: "Email or password is invalid" });
+    return NextResponse.json(
+      { message: "password is incorrect" },
+      { status: 400 }
+    );
   }
 
   const alg = "HS256";
@@ -34,7 +38,5 @@ export async function POST(req: Request) {
 
   setCookie("jwt", token, { maxAge: 60 * 6 * 24 });
 
-  return Response.json({
-    email: user.email,
-  });
+  return NextResponse.json({ message: "welcome", user }, { status: 200 });
 }
