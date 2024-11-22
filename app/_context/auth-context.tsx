@@ -62,8 +62,6 @@ export default function AuthContext({
         error: null,
         loading: false,
       });
-
-      console.log("authState", authState);
     } catch (error: unknown) {
       const errorMessage = axios.isAxiosError(error)
         ? error.message
