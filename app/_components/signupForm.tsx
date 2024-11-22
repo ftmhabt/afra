@@ -75,7 +75,6 @@ export default function SignupForm() {
         </button>
       </form>
       <h1>{error ? error : ""}</h1>
-      <h1>{data ? data.email : ""}</h1>
     </>
   );
 }
