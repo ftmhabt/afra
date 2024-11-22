@@ -6,6 +6,15 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default function SigninForm() {
+  const { data, error, loading, setAuthState } =
+    useContext(AuthorizationContext);
+  useEffect(() => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false,
+    });
+  }, []);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -19,7 +28,6 @@ export default function SigninForm() {
   };
   const [disabled, setDisabled] = useState(true);
   const { signin } = useAuth();
-  const { data, error, loading } = useContext(AuthorizationContext);
 
   if (data) redirect("/dashboard");
   useEffect(() => {

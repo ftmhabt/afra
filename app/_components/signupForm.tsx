@@ -2,8 +2,21 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import useAuth from "../_hooks/use-auth";
 import { AuthorizationContext } from "../_context/auth-context";
+import { redirect } from "next/navigation";
 
 export default function SignupForm() {
+  const { data, error, loading, setAuthState } =
+    useContext(AuthorizationContext);
+  useEffect(() => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false,
+    });
+  }, []);
+
+  if (data) redirect("/dashboard");
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -17,7 +30,6 @@ export default function SignupForm() {
   };
   const [disabled, setDisabled] = useState(true);
   const { signup } = useAuth();
-  const { data, error, loading } = useContext(AuthorizationContext);
 
   useEffect(() => {
     if (inputs.email && inputs.password) {

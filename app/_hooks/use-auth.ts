@@ -36,14 +36,23 @@ const useAuth = () => {
         loading: false,
       });
     } catch (error: unknown) {
-      const errorMessage = axios.isAxiosError(error)
-        ? error.message
-        : "An unexpected error occurred";
-      setAuthState({
-        data: null,
-        error: errorMessage,
-        loading: false,
-      });
+      if (axios.isAxiosError(error)) {
+        // Log the error response for debugging
+        console.log("Error response: ", error.response?.data);
+
+        setAuthState({
+          data: null,
+          error:
+            error.response?.data?.message || "An unexpected error occurred",
+          loading: false,
+        });
+      } else {
+        setAuthState({
+          data: null,
+          error: "An unexpected error occurred",
+          loading: false,
+        });
+      }
     }
   };
 
@@ -75,14 +84,23 @@ const useAuth = () => {
         console.log("setAuthState is: ", data);
       }
     } catch (error: unknown) {
-      const errorMessage = axios.isAxiosError(error)
-        ? error.message
-        : "An unexpected error occurred";
-      setAuthState({
-        data: null,
-        error: errorMessage,
-        loading: false,
-      });
+      if (axios.isAxiosError(error)) {
+        // Log the error response for debugging
+        console.log("Error response: ", error.response?.data);
+
+        setAuthState({
+          data: null,
+          error:
+            error.response?.data?.message || "An unexpected error occurred",
+          loading: false,
+        });
+      } else {
+        setAuthState({
+          data: null,
+          error: "An unexpected error occurred",
+          loading: false,
+        });
+      }
     }
   };
 
