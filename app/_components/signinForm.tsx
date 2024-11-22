@@ -4,6 +4,7 @@ import useAuth from "../_hooks/use-auth";
 import { AuthorizationContext } from "../_context/auth-context";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { PropagateLoader } from "react-spinners";
 
 export default function SigninForm() {
   const { data, error, loading, setAuthState } =
@@ -38,9 +39,7 @@ export default function SigninForm() {
     }
   }, [inputs]);
   return (
-    <>
-      <div>welcome</div>
-      <div>sign in</div>
+    <div className="flex flex-col items-center justify-around">
       <form
         className="flex flex-col gap-4 *:w-60 *:rounded-md *:p-2"
         onSubmit={(e) => e.preventDefault()}
@@ -63,17 +62,16 @@ export default function SigninForm() {
         />
         <button
           disabled={disabled && !loading}
-          className="bg-primary text-white disabled:text-secondary"
+          className="bg-primary text-white disabled:text-secondary h-10"
           onClick={() => {
             signin(inputs);
             console.log(inputs);
           }}
         >
-          {loading ? "Loading" : "Sign In"}
+          {loading ? <PropagateLoader color="#296250" /> : "ورود"}
         </button>
       </form>
-      <Link href="/signup">sign up</Link>
       <h1>{error ? error : ""}</h1>
-    </>
+    </div>
   );
 }

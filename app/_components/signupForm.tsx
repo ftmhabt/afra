@@ -3,6 +3,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import useAuth from "../_hooks/use-auth";
 import { AuthorizationContext } from "../_context/auth-context";
 import { redirect } from "next/navigation";
+import { PropagateLoader } from "react-spinners";
 
 export default function SignupForm() {
   const { data, error, loading, setAuthState } =
@@ -40,9 +41,7 @@ export default function SignupForm() {
   }, [inputs]);
 
   return (
-    <>
-      <div>welcome</div>
-      <div>register</div>
+    <div className="flex flex-col items-center justify-around">
       <form
         className="flex flex-col gap-4 *:w-60 *:rounded-md *:p-2"
         onSubmit={(e) => e.preventDefault()}
@@ -51,7 +50,7 @@ export default function SignupForm() {
           type="email"
           name="email"
           id="email"
-          placeholder="email"
+          placeholder="email@email.com"
           value={inputs.email}
           onChange={(e) => handleChange(e)}
         />
@@ -59,22 +58,22 @@ export default function SignupForm() {
           type="password"
           name="password"
           id="password"
-          placeholder="password"
+          placeholder="رمز عبور"
           value={inputs.password}
           onChange={(e) => handleChange(e)}
         />
         <button
           disabled={disabled && !loading}
-          className="bg-primary text-white disabled:text-secondary"
+          className="bg-primary text-white disabled:text-secondary h-10 flex items-center justify-center"
           onClick={(e) => {
             e.preventDefault();
             signup(inputs);
           }}
         >
-          {loading ? "Loading" : "Sign Up"}
+          {loading ? <PropagateLoader color="#fff" /> : "ثبت نام"}
         </button>
       </form>
       <h1>{error ? error : ""}</h1>
-    </>
+    </div>
   );
 }
