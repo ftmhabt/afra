@@ -27,9 +27,7 @@ export default function SignupForm() {
     }
   }, [inputs]);
 
-  return loading ? (
-    <h1>loading</h1>
-  ) : (
+  return (
     <>
       <div>welcome</div>
       <div>register</div>
@@ -54,14 +52,14 @@ export default function SignupForm() {
           onChange={(e) => handleChange(e)}
         />
         <button
-          disabled={disabled}
+          disabled={disabled && !loading}
           className="bg-primary text-white disabled:text-secondary"
           onClick={(e) => {
             e.preventDefault();
             signup(inputs);
           }}
         >
-          Sign Up
+          {loading ? "Loading" : "Sign Up"}
         </button>
       </form>
       <h1>{error ? error : ""}</h1>

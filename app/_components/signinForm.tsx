@@ -29,9 +29,7 @@ export default function SigninForm() {
       setDisabled(true);
     }
   }, [inputs]);
-  return loading ? (
-    <h1>loading</h1>
-  ) : (
+  return (
     <>
       <div>welcome</div>
       <div>sign in</div>
@@ -56,14 +54,14 @@ export default function SigninForm() {
           onChange={(e) => handleChange(e)}
         />
         <button
-          disabled={disabled}
+          disabled={disabled && !loading}
           className="bg-primary text-white disabled:text-secondary"
           onClick={() => {
             signin(inputs);
             console.log(inputs);
           }}
         >
-          Sign In
+          {loading ? "Loading" : "Sign In"}
         </button>
       </form>
       <Link href="/signup">sign up</Link>
