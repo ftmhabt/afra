@@ -4,7 +4,7 @@ import { AuthorizationContext } from "../_context/auth-context";
 import { redirect } from "next/navigation";
 
 export default function UserPage() {
-  const { data, loading } = useContext(AuthorizationContext);
+  const { data } = useContext(AuthorizationContext);
 
   useEffect(() => {
     if (!data) {
@@ -12,5 +12,5 @@ export default function UserPage() {
     }
   }, []);
 
-  return loading && <div>dashboard</div>;
+  return <div>dashboard</div>;
 }
